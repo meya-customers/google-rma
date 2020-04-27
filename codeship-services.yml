@@ -1,0 +1,11 @@
+google-rma:
+  build:
+    image: meya-ai/google-rma
+    dockerfile: codeship.Dockerfile
+    encrypted_args_file: codeship-env.encrypted
+  cached: true
+  encrypted_env_file: codeship-env.encrypted
+  environment:
+    MEYA_GRID_URL: https://grid.meya.ai
+    MEYA_APP_ID: app-af34d9afcc9246e3918a2aa02e8e77a5
+    MEYA_INTERACTIVE_PROMPT: 'false'

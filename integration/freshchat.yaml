@@ -1,0 +1,8 @@
+id: freshchat
+type: meya.freshworks.freshchat.integration
+app_id: (@ vault.freshchat.app_id )
+api_token: (@ vault.freshchat.api_token )
+bot_agent_email: (@ config.freshchat.bot_agent_email )
+channel_name: Inbox
+create_conversation: on_csp_transfer
+agent_command_prefix: '@'

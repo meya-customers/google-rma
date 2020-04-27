@@ -1,0 +1,10 @@
+*.js
+.direnv
+.idea
+.meya
+.pytest_cache
+__pycache__
+codeship-env
+codeship.aes
+meya.local.yaml
+node_modules

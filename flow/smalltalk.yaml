@@ -1,0 +1,8 @@
+triggers:
+  - integration: integration.dialogflow
+    language: en
+    expect: dialogflow
+    intent_regex: ^(smalltalk\..+)|(greetings)$
+
+steps:
+  - say: (@ flow.dialogflow_response.queryResult.fulfillmentText )

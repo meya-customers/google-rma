@@ -1,0 +1,24 @@
+triggers:
+  - keyword: Support
+
+steps:
+  - say: Ok, let me connect you with someone from our support team.
+  - flow: flow.user_info
+
+  - user_set:
+      support: true
+
+  - type: meya.session.component.chat.open
+
+  - (freshchat)
+  - type: meya.csp.component.session.agent
+    say: Transferring you to a live agent...
+    integration: freshchat
+    note: This is a support request.
+    data:
+      user:
+        email: (@ user.email )
+        phone: (@ user.phone )
+        first_name: (@ user.first_name )
+        last_name: (@ user.last_name )
+      assign_to_group: Success

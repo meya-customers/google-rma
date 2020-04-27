@@ -1,0 +1,7 @@
+triggers:
+  - keyword: test
+    ignorecase: true
+steps:
+  - type: component.foo
+    foo: bar
+  - say: ✅

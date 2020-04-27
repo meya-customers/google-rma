@@ -1,0 +1,33 @@
+steps:
+  - if: (@ user.name and user.email and user.phone )
+    then: end
+    else: next
+
+  - ask_form: What's your full name?
+    icon: user
+    label: Full name
+  - user_set: name
+
+  - type: meya.util.text.component.split_name
+    name: (@ user.name )
+  - say: 'Name: (@ flow.result )'
+  - user_set:
+      first_name: (@ flow.result.first_name )
+      last_name: (@ flow.result.last_name )
+
+  - ask_form:
+    expect: email_address
+    composer:
+      visibility: collapse
+      placeholder: Have a question?
+    error_message: Not a valid email address, please try again.
+    retries: 3
+  - user_set: email
+
+  - ask_form: What's your phone number?
+    icon: phone
+    label: Phone number
+    composer:
+      visibility: collapse
+      placeholder: Have a question?
+  - user_set: phone

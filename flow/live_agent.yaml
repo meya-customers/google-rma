@@ -1,0 +1,43 @@
+id: flow.live_agent.session.established
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.established
+steps:
+  - say: (You're now talking to (@ flow.event.data.agent_name ))
+---
+id: flow.live_agent.agent.request.error
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.request.error
+
+steps:
+  - say: All our live agents are currently offline.
+---
+id: flow.live_agent.rma.session.ended
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.ended
+    when: (@ user.approval == "pending" )
+
+steps:
+  - say: Your chat session with the live agent was ended but you still require an
+      agent's approval.
+  - delay: 1
+  - ask: Would you like to try again?
+    buttons:
+      - text: Yes
+        action:
+          flow: flow.warranty
+          jump: rma_approval
+      - text: No
+        action: end
+---
+id: flow.live_agent.support.session.ended
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.ended
+    when: (@ user.support )
+
+steps:
+  - user_set:
+      support: None
+  - say: Your chat session with the live agent ended.
+  - delay: 1
+  - flow: flow.initial
+    transfer: true

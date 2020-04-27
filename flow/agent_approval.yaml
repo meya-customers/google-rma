@@ -1,0 +1,32 @@
+id: trigger.debug_agent_approval
+keyword: _agent_approval
+ignorecase: true
+action:
+  flow: flow.warranty
+  jump: rma_transfer
+---
+id: flow.rma_approved
+triggers:
+  - agent_command: ^.*approve.*
+    ignorecase: true
+    when: (@ user.approval == "pending" )
+
+steps:
+  - user_set:
+      approval: accepted
+
+  - type: meya.csp.component.session.end
+    integration: freshchat
+
+  - say: Great! Looks like you're all set. Follow the instructions in the PDF below
+      to return the item within 14 days and we'll send you a replacement device.
+
+  - delay: 1
+
+  - url: https://www.generalmills.com/~/media/Images/GMI/TradingPartners/NorthAmerica/2-Standard%20Shipping%20Label%20Example.pdf?la=en
+    filename: RMA_23092011.pdf
+
+  - delay: 4
+
+  - flow: flow.initial
+    transfer: true

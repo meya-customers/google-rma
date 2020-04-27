@@ -1,0 +1,15 @@
+steps:
+  - ask: Have you tried switching it off and on again?
+    buttons:
+      - text: Yes
+        action:
+          jump: warranty_claim
+      - text: No
+        action:
+          jump: warranty_claim
+
+  # TODO: Add more trouble shooting guides
+  - (warranty_claim)
+  - say: Great, lets fill out your warranty claim.
+  - flow: flow.warranty
+    transfer: true

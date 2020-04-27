@@ -1,0 +1,21 @@
+triggers:
+  - keyword: Payment support
+
+steps:
+  - say: Ok, let me connect you with someone from our payments support team.
+  - flow: flow.user_info
+
+  - user_set:
+      support: true
+
+  - type: meya.session.component.chat.open
+
+  - (live_agent)
+  - type: meya.csp.component.session.agent
+    say: Transferring you to a live agent...
+    integration: live_agent
+    note: This is a support request.
+    data:
+      FullName__c: (@ user.first_name ) (@ user.last_name )
+      Phone__c: (@ user.phone )
+      Email__c: (@ user.email )

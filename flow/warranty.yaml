@@ -1,0 +1,106 @@
+steps:
+  - (warranty)
+  - ask: Is it under warranty?
+    buttons:
+      - text: Yes
+        action:
+          jump: has_warranty
+      - text: No
+        action:
+          flow: flow.no_warranty
+
+  - (has_warranty)
+  - say: |
+      Thanks! I'll need to collect some info and we'll make a warranty claim:
+      1. Name
+      2. Email
+      3. Phone number
+      4. IMEI
+      5. Purchase receipt (if possible)
+
+  - delay: 0.5
+
+  - flow: flow.user_info
+
+  - say: What's your IMEI?
+  - url: https://www.lifewire.com/thmb/m4GpK-ySy2s2SOxKUSFr8QCuGjk=/2523x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/002.2_2377713-5b970ba4c9e77c005008c040.jpg
+    alt: Image of IMEI number
+  - ask_form:
+    icon: barcode
+    label: IMEI
+    composer:
+      visibility: collapse
+      placeholder: Have a question?
+  - user_set: imei
+
+  - (receipt)
+  - ask: Do you have a receipt?
+    buttons:
+      - text: Yes
+        action:
+          jump: upload_receipt
+      - text: No
+        action:
+          jump: rma_approval
+
+  - (upload_receipt)
+  - ask: Click the + button to upload your receipt.
+    expect: image
+
+  - delay: 1
+  - say: Thanks for uploading! It looks good.
+  - delay: 2
+  - type: meya.orb.component.screen.end
+
+  - (rma_approval)
+  - ask: I have everything I need for now, so I will transfer you to a human colleague
+      who will approve the return.
+    tiles:
+      - title: Return information
+        description: Please ensure all fields are correct before continuing
+        rows:
+          -   - cell: Full name
+                value: (@ user.first_name ) (@ user.last_name )
+          -   - cell: Email
+                value: (@ user.email )
+          -   - cell: Region
+                value: (@ user.country_code | upper )
+              - cell: Phone
+                value: (@ user.phone )
+          -   - cell: Device
+                value: (@ user.device )
+              - cell: Model
+                value: (@ user.device_model )
+          -   - cell: IMEI
+                value: (@ user.imei )
+        buttons:
+          - text: OK
+            result: true
+
+  - (rma_transfer)
+  - user_set:
+      approval: pending
+
+  - type: meya.session.component.chat.open
+
+  - (freshchat)
+  - type: meya.csp.component.session.agent
+    say: Transferring you to a live agent to help complete your replacement request...
+    integration: freshchat
+    note: This is an RMA request for (@ user.device )-(@ user.device_model ).
+    data:
+      user:
+        email: (@ user.email )
+        phone: (@ user.phone )
+        properties:
+          - name: Device
+            value: (@ user.device )
+          - name: Device Model
+            value: (@ user.device_model )
+          - name: IMEI
+            value: (@ user.imei )
+          - name: Country Code
+            value: (@ user.country_code )
+        first_name: (@ user.first_name )
+        last_name: (@ user.last_name )
+      assign_to_group: Success

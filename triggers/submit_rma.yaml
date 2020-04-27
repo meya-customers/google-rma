@@ -1,0 +1,5 @@
+keyword: _rma_transfer
+ignorecase: true
+action:
+  flow: flow.warranty
+  jump: rma_transfer

@@ -1,0 +1,15 @@
+triggers:
+  - type: meya.session.trigger.page.open
+    when: (@ not thread.open_page )
+  - keyword: Start
+
+steps:
+  - thread_set:
+      open_page: true
+  - hero: How can we help you?
+    quick_replies:
+      - Returns, refunds, & warranties
+      - Support
+    composer:
+      visibility: show
+      placeholder: Describe your issue

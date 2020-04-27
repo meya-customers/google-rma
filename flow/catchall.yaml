@@ -1,0 +1,5 @@
+triggers:
+  - type: meya.text.trigger.catchall
+
+steps:
+  - say: Sorry, I don't understand 🤔

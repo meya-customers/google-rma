@@ -1,0 +1,74 @@
+triggers:
+  - keyword: Returns, refunds, & warranties
+
+steps:
+  - say: Great, let's get you're device details.
+  # TODO: Replace this with a search component
+  - ask: What device?
+    quick_replies:
+      - Pixel
+      - Google Home
+  - user_set: device
+  - case:
+      Pixel:
+        jump: pixel
+      Google Home:
+        jump: google_home
+    default:
+      jump: other
+
+  - (pixel)
+  - ask: What Pixel model?
+    quick_replies:
+      - Pixel Buds
+      - Pixel
+      - Pixel XL
+      - Pixel 2
+      - Pixel 2 XL
+      - Pixel 3
+      - Pixel 3 XL
+      - Pixel 3a
+      - Pixel 3a XL
+  - user_set: device_model
+  - jump: region
+
+  - (google_home)
+  - ask: What Pixel model?
+    quick_replies:
+      - Google Home Max
+      - Google Home
+      - Google Home Mini
+      - Nest Hub
+  - user_set: device_model
+  - jump: region
+
+  - (other)
+  - ask: What device model?
+  - user_set: device
+
+  # We might want to do a location lookup based on IP or google maps query
+  - (region)
+  - ask: Where do you live?
+    button_style: radio
+    tiles:
+      - buttons:
+          - text: US
+            result:
+              country_code: us
+          - text: Canada
+            result:
+              country_code: ca
+          - text: Singapore
+            result:
+              country_code: sg
+  - user_set:
+      country_code: (@ flow.result.country_code )
+
+  - ask: Have you tried troubleshooting?
+    buttons:
+      - text: Yes
+        action:
+          flow: flow.warranty
+      - text: No
+        action:
+          flow: flow.troubleshooting
