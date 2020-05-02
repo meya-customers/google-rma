@@ -32,7 +32,7 @@ jobs:
             "meya-cli>=2.0.0"
       - name: Install Node dependencies
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_auth_token }}" > .npmrc
+          echo "//npm.fury.io/meya-ai/:_authToken=${{ secrets.gemfury_auth_token }}" > .npmrc
           npm install yarn -g
           yarn install
       - name: Authenticate using Meya auth token
