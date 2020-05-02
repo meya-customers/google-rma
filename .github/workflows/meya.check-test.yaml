@@ -26,6 +26,9 @@ jobs:
             "pygit2>=1.1.1" \
             "meya-sdk>=2.0.0" \
             "meya-cli>=2.0.0"
+          yarn install
+        env:
+          NPM_AUTH_TOKEN: ${{ secrets.npm_auth_token }}
       - name: Authenticate using Meya auth token
         run: |
           meya auth add --grid-url https://grid.meya.ai --auth-token ${{ secrets.auth_token }}
@@ -40,5 +43,4 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           meya push --force --build-image
-          yarn install
           yarn deploy
