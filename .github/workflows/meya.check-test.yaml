@@ -18,7 +18,11 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      - name: Install dependencies
+      - name: Set up Node.js 10.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade \
@@ -26,9 +30,11 @@ jobs:
             "pygit2>=1.1.1" \
             "meya-sdk>=2.0.0" \
             "meya-cli>=2.0.0"
+      - name: Install Node dependencies
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_auth_token }}" > .npmrc
+          npm install yarn -g
           yarn install
-        env:
-          NPM_AUTH_TOKEN: ${{ secrets.npm_auth_token }}
       - name: Authenticate using Meya auth token
         run: |
           meya auth add --grid-url https://grid.meya.ai --auth-token ${{ secrets.auth_token }}
@@ -39,8 +45,9 @@ jobs:
         run: meya check
       - name: Run tests
         run: meya test
-      - name: Deploy
+      - name: Deploy to Grid
         if: github.ref == 'refs/heads/master'
-        run: |
-          meya push --force --build-image
-          yarn deploy
+        run: meya push --force --build-image
+      - name: Build and deploy Orb
+        if: github.ref == 'refs/heads/master'
+        run: yarn deploy
