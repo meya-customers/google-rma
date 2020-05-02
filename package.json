@@ -5,7 +5,8 @@
         "build": "webpack",
         "analyze": "ANALYZE=Y webpack",
         "dev": "webpack-dev-server --mode development --open",
-        "deploy": "yarn build && gsutil -h 'Cache-Control:public, max-age=86400, s-maxage=10' cp index.html bundle.js gs://meya-v2-demo/google-rma-af34d9"
+        "upload": "gsutil -h 'Cache-Control:public, max-age=86400, s-maxage=10' cp index.html bundle.js gs://meya-v2-demo/google-rma-af34d9",
+        "deploy": "yarn build && yarn upload"
     },
     "devDependencies": {
         "@meya-ai/meya-orb": "^2.0.0",
