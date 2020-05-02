@@ -57,8 +57,8 @@ jobs:
           rm /opt/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz \
           ln -s /opt/google-cloud-sdk/bin/gcloud /usr/local/bin/gcloud \
           ln -s /opt/google-cloud-sdk/bin/gsutil /usr/local/bin/gsutil \
-          echo "${{ secrets.google_auth_json }}" > /keyconfig.json \
-          gcloud auth activate-service-account --key-file /keyconfig.json --project "${{ secrets.google_project_id }}" \
+          echo "${{ secrets.google_auth_json }}" > /var/tmp/keyconfig.json \
+          gcloud auth activate-service-account --key-file /var/tmp/keyconfig.json --project "${{ secrets.google_project_id }}" \
       - name: Deploy Orb demo
         if: github.ref == 'refs/heads/master'
         run: yarn upload
