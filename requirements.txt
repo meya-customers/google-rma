@@ -1,2 +1,0 @@
-meya-sdk==2.0.0
-meya-cli==2.0.1

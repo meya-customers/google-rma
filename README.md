@@ -26,6 +26,7 @@ pip3 install --upgrade \
 meya auth add --auth-token $MEYA_AUTH_TOKEN
 # connect to existing app
 meya connect --app-id $MEYA_APP_ID
+yarn install
 ```
 
 ## Workflow
@@ -40,6 +41,7 @@ meya vault upload --file vault.secret.yaml
 meya push --watch
 # for a full rebuild (useful for production deployments)
 meya push --force --build-image
+yarn deploy
 ```
 
 ## GitHub Actions

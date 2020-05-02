@@ -15,9 +15,10 @@ from meya.util.generate_id import generate_member_id
 from unittest.mock import MagicMock
 
 
+# example test...remove `_x` to enable
 @pytest.mark.skip(reason="Need to load element from TypeRegistry")
 @pytest.mark.asyncio
-async def test_submit_rma_component():
+async def _xtest_submit_rma_component():
     bot_id = "test_bot"
     component = RmaComponentElement()
     stack = []

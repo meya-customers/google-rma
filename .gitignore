@@ -8,3 +8,6 @@ codeship-env
 codeship.aes
 meya.local.yaml
 node_modules
+venv/
+scratch/
+vault.secret*.yaml
