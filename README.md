@@ -12,7 +12,6 @@ Try it live: https://demo.meya.ai/google-rma-af34d9/
 brew install python@3 libgit2
 MEYA_AUTH_TOKEN=your_meya_auth_token
 MEYA_APP_ID=app-your_app_id
-brew install python@3 libgit2
 git clone https://github.com/meya-customers/google-rma.git google-rma
 cd google-rma
 # you can optionally setup a venv instead as well
