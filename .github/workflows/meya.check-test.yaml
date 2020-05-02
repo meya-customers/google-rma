@@ -47,9 +47,6 @@ jobs:
         run: meya test
       - name: Build Orb demo
         run: yarn build
-      - name: Deploy to Grid
-        if: github.ref == 'refs/heads/master'
-        run: meya push --force --build-image
       - name: Install Google Cloud dependencies
         run: |
           wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz -O /opt/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz \
@@ -59,6 +56,9 @@ jobs:
           ln -s /opt/google-cloud-sdk/bin/gsutil /usr/local/bin/gsutil \
           echo "${{ secrets.google_auth_json }}" > /var/tmp/keyconfig.json \
           gcloud auth activate-service-account --key-file /var/tmp/keyconfig.json --project "${{ secrets.google_project_id }}" \
+      - name: Deploy to Grid
+        if: github.ref == 'refs/heads/master'
+        run: meya push --force --build-image
       - name: Deploy Orb demo
         if: github.ref == 'refs/heads/master'
         run: yarn upload
