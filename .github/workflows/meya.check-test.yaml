@@ -1,4 +1,4 @@
-# This workflow will install Python and Meya dependencies, runs tests and code formatting check
+# This workflow will install Python, Javascript and Meya dependencies, runs tests and code formatting check
 name: Meya build
 
 on:
