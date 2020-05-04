@@ -19,7 +19,7 @@ steps:
 id: flow.freshchat.support.chat_resolved
 triggers:
   - event_type: meya.freshworks.freshchat.event.session.resolve
-    when: (@ user.support )
+    when: (@ user.support is sameas true )
 
 steps:
   - user_set:
