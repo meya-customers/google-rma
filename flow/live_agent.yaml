@@ -32,7 +32,7 @@ steps:
 id: flow.live_agent.support.session.ended
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.ended
-    when: (@ user.support )
+    when: (@ user.support is sameas true )
 
 steps:
   - user_set:
