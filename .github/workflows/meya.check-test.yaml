@@ -49,4 +49,4 @@ jobs:
       - name: Deploy Orb demo
         if: github.ref == 'refs/heads/master'
         run: /opt/google-cloud-sdk/bin/gsutil -h 'Cache-Control:public, max-age=86400,
-          s-maxage=10' cp public/index.html gs://meya-v2-demo/google-rma-af34d9
+          s-maxage=10' cp index.html gs://meya-v2-demo/google-rma-af34d9
