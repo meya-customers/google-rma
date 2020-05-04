@@ -18,10 +18,6 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      - name: Set up Node.js 10.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10.x
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -30,11 +26,6 @@ jobs:
             "pygit2>=1.1.1" \
             "meya-sdk>=2.0.0" \
             "meya-cli>=2.0.0"
-      - name: Install Node dependencies
-        run: |
-          echo "//npm.fury.io/meya-ai/:_authToken=${{ secrets.gemfury_auth_token }}" > .npmrc
-          npm install yarn -g
-          yarn install
       - name: Authenticate using Meya auth token
         run: |
           meya auth add --grid-url https://grid.meya.ai --auth-token ${{ secrets.auth_token }}
@@ -45,8 +36,6 @@ jobs:
         run: meya check
       - name: Run tests
         run: meya test
-      - name: Build Orb demo
-        run: yarn build
       - name: Install Google Cloud dependencies
         run: |
           wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz -O /opt/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz
@@ -59,4 +48,5 @@ jobs:
         run: meya push --force --build-image
       - name: Deploy Orb demo
         if: github.ref == 'refs/heads/master'
-        run: yarn upload
+        run: /opt/google-cloud-sdk/bin/gsutil -h 'Cache-Control:public, max-age=86400,
+          s-maxage=10' cp public/index.html gs://meya-v2-demo/google-rma-af34d9

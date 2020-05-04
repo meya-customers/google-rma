@@ -6543,6 +6543,31 @@
         aria-hidden="true"
         style="width: 1px; height: 1px; position: absolute; top: -100px;"
 ></iframe>
-<script src="bundle.js"></script>
+<script type="text/javascript">
+    window.orbConfig = {
+        connectionOptions: {
+            gridUrl: "https://grid.meya.ai",
+            appId: "app-af34d9afcc9246e3918a2aa02e8e77a5",
+            integrationId: "integration.orb",
+        },
+        theme: {
+            "brandColor": "#1867d2",
+            "botAvatarUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+        },
+        container: document.getElementById("orb-mount"),
+        windowFunctions: true,
+    };
+    (function () {
+        var script = document.createElement("script")
+        script.type = "text/javascript"
+        script.async = true
+        script.src = "https://cdn.meya.ai/v2/orb.js"
+        document.body.appendChild(script)
+        var fontStyleSheet = document.createElement("link")
+        fontStyleSheet.rel = "stylesheet"
+        fontStyleSheet.href = "https://cdn.meya.ai/font/inter.css"
+        document.body.appendChild(fontStyleSheet)
+    })()
+</script>
 </body>
 </html>
