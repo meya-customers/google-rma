@@ -2,6 +2,7 @@
 name: Meya build
 
 on:
+  repository_dispatch:
   push:
     branches:
       - '*'
