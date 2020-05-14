@@ -11,6 +11,20 @@ triggers:
 steps:
   - say: All our live agents are currently offline.
 ---
+id: flow.live_agent.agent.request.success
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.request.ok
+
+steps:
+  - say: >
+      (% if flow.event.data.queue_position|int > 0 %)
+      Chat request success, you're in queue position
+      (@ flow.event.data.queue_position|int )
+      (% else %)
+      We're connecting you to the next available agent.
+      (% endif %)
+---
 id: flow.live_agent.rma.session.ended
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.ended
@@ -41,3 +55,12 @@ steps:
   - delay: 1
   - flow: flow.initial
     transfer: true
+---
+id: flow.live_agent.support.session.queue.update
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.queue.update
+    when: (@ member.role.system )
+
+steps:
+  - say: You're now in queue position (@ flow.event.data.position | int )
