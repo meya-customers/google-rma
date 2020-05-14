@@ -1,16 +1,7 @@
-id: trigger.debug_agent_approval
-keyword: _agent_approval
-ignorecase: true
-action:
-  flow: flow.warranty
-  jump: rma_transfer
----
-id: flow.rma_approved
 triggers:
   - agent_command: ^.*approve.*
     ignorecase: true
     when: (@ user.approval == "pending" )
-
 steps:
   - user_set:
       approval: accepted
