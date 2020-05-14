@@ -1,0 +1,18 @@
+triggers:
+  - agent_command: ^.*serial.*
+    ignorecase: true
+steps:
+  - (serial_no)
+  - ask: What is the device's serial number?
+  - user_set: device_serial_no
+  - say: >
+      Thanks, I've logged the serial number (@ user.device_serial_no ). Is
+      this correct?
+    quick_replies:
+      - text: Yes
+        action: next
+      - text: No
+        action:
+          jump: serial_no
+  - say: Ok great.
+

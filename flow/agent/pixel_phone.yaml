@@ -1,0 +1,17 @@
+triggers:
+  - agent_command: ^.*pixel.*phone.*
+    ignorecase: true
+steps:
+  - ask: Which pixel phone do you have?
+    layout: row
+    button_style: radio
+    tiles:
+      - title: Pixel 4 XL Black
+        image:
+          url: https://lh3.googleusercontent.com/1cAx0YybaOQTBwtk7gC4Ndef4w__Lg0MT-TsY7O5ycMnEEVF0l3YTtyrEGYhWNINzw=rw-w1520
+        result: pixel-4-xl-black
+      - title: Pixel 4 XL White
+        image:
+          url: https://lh3.googleusercontent.com/qFd_GwwRdmU6bePdrwf-R6mYhTtFgSJw4do4JGXzrJvnUi0qgUsBFp1L0PIrCllZzd0j=rw-w1520
+        result: pixel-4-xl-white
+  - say: You selected (@ flow.result )
