@@ -1,4 +1,4 @@
-id: flow.freshchat.rma.chat_resolved
+id: flow.freshchat.session.resolve.approve
 triggers:
   - event_type: meya.freshworks.freshchat.event.session.resolve
     when: (@ user.approval == "pending" )
@@ -16,7 +16,7 @@ steps:
       - text: No
         action: end
 ---
-id: flow.freshchat.support.chat_resolved
+id: flow.freshchat.session.resolve.support
 triggers:
   - event_type: meya.freshworks.freshchat.event.session.resolve
     when: (@ user.support is sameas true )

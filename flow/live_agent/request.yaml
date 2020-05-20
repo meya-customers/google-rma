@@ -1,0 +1,20 @@
+id: flow.live_agent.request.error
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.request.error
+
+steps:
+  - say: All our live agents are currently offline.
+---
+id: flow.live_agent.request.ok
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.request.ok
+
+steps:
+  - say: >
+      (% if flow.event.data.queue_position|int > 0 %)
+      Chat request success, you're in queue position
+      (@ flow.event.data.queue_position|int )
+      (% else %)
+      We're connecting you to the next available agent.
+      (% endif %)
