@@ -1,3 +1,8 @@
+triggers:
+  - keyword: _agent_approval
+    ignorecase: true
+    action:
+      jump: rma_transfer
 steps:
   - (warranty)
   - ask: Is it under warranty?
@@ -80,10 +85,7 @@ steps:
   - (rma_transfer)
   - user_set:
       approval: pending
-
   - type: meya.session.component.chat.open
-
-  - (freshchat)
   - type: meya.csp.component.session.agent
     say: Transferring you to a live agent to help complete your replacement request...
     integration: freshchat

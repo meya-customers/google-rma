@@ -1,0 +1,18 @@
+id: flow.live_agent.session.established
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.established
+steps:
+  - say: (You're now talking to (@ flow.event.data.agent_name ))
+---
+id: flow.live_agent.session.ended
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.ended
+    when: (@ user.support is sameas true )
+
+steps:
+  - user_set:
+      support: None
+  - say: Your chat session with the live agent ended.
+  - delay: 1
+  - flow: flow.initial
+    transfer: true
