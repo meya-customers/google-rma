@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from meya.component.element import Component
 from meya.element.field import element_field
 from meya.entry import Entry
-from meya.orb.composer_spec import ComposerSpec
+from meya.orb.composer_spec import ComposerEventSpec
 from meya.text.event.say import SayEvent
 from meya.util.generate_id import generate_member_id
 from typing import List
@@ -19,7 +19,7 @@ class TestComponentElement(Component):
             member_id=generate_member_id(self.entry.bot_id),
             text=text,
             thread_id=self.entry.thread_id,
-            composer=ComposerSpec(),
+            composer=ComposerEventSpec(),
             quick_replies=[],
         )
         return self.respond(text_event)
