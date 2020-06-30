@@ -1,6 +1,5 @@
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.queue.update
-    when: (@ member.role.system )
 
 steps:
   - say: You're now in queue position (@ flow.event.data.position | int )

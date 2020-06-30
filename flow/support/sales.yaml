@@ -1,8 +1,8 @@
 triggers:
-  - keyword: _payment_support
+  - keyword: _sales
 
 steps:
-  - say: Ok, let me connect you with someone from our payments support team.
+  - say: Ok, let me connect you with someone from our Sales team.
   - flow: flow.user_info
 
   - user_set:
@@ -13,8 +13,8 @@ steps:
   - (live_agent)
   - type: meya.csp.component.session.agent
     say: Transferring you to a live agent...
-    integration: live_agent.support
-    note: This is a support request.
+    integration: live_agent.sales
+    note: This is a sales request.
     data:
       FullName__c: (@ user.first_name ) (@ user.last_name )
       Phone__c: (@ user.phone )

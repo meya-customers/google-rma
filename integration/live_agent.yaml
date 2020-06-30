@@ -1,4 +1,4 @@
-id: live_agent
+id: live_agent.support
 type: meya.salesforce.live_agent.integration
 api_root: (@ vault.live_agent.api_root )
 username: (@ vault.live_agent.username )
@@ -6,5 +6,30 @@ password: (@ vault.live_agent.password )
 api_endpoint: (@ vault.live_agent.api_endpoint )
 organization_id: (@ vault.live_agent.organization_id )
 deployment_id: (@ vault.live_agent.deployment_id )
-button_id: (@ vault.live_agent.button_id )
+button_id: (@ vault.live_agent.support.button_id )
 agent_command_prefix: /
+markdown: true
+---
+id: live_agent.faq
+type: meya.salesforce.live_agent.integration
+api_root: (@ vault.live_agent.api_root )
+username: (@ vault.live_agent.username )
+password: (@ vault.live_agent.password )
+api_endpoint: (@ vault.live_agent.api_endpoint )
+organization_id: (@ vault.live_agent.organization_id )
+deployment_id: (@ vault.live_agent.deployment_id )
+button_id: (@ vault.live_agent.faq.button_id )
+agent_command_prefix: /
+markdown: true
+---
+id: live_agent.sales
+type: meya.salesforce.live_agent.integration
+api_root: (@ vault.live_agent.api_root )
+username: (@ vault.live_agent.username )
+password: (@ vault.live_agent.password )
+api_endpoint: (@ vault.live_agent.api_endpoint )
+organization_id: (@ vault.live_agent.organization_id )
+deployment_id: (@ vault.live_agent.deployment_id )
+button_id: (@ vault.live_agent.sales.button_id )
+agent_command_prefix: /
+markdown: true
