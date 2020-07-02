@@ -3,9 +3,7 @@ import meya.util.uuid
 from dataclasses import dataclass
 from meya.component.element import Component
 from meya.entry import Entry
-from meya.orb.composer_spec import ComposerEventSpec
 from meya.text.event.say import SayEvent
-from meya.util.generate_id import generate_member_id
 from typing import List
 
 
@@ -20,10 +18,6 @@ class SubmitRmaComponent(Component):
             },
         )
         text_event = SayEvent(
-            member_id=generate_member_id(self.entry.bot_id),
-            text=f"Submitted your RMA, your reference {meya.util.uuid.uuid4_hex()}",
-            thread_id=self.entry.thread_id,
-            composer=ComposerEventSpec(),
-            quick_replies=[],
+            text=f"Submitted your RMA, your reference {meya.util.uuid.uuid4_hex()}"
         )
         return self.respond(text_event)
