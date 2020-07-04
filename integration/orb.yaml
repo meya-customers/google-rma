@@ -1,5 +1,4 @@
 type: meya.orb.integration
 theme:
   brand_color: '#1867d2'
-  bot_avatar_url: https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg
 container: document.getElementById("orb-mount")
