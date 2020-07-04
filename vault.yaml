@@ -17,5 +17,6 @@ live_agent.password: xxx
 live_agent.api_endpoint: xxx
 live_agent.organization_id: xxx
 live_agent.deployment_id: xxx
+live_agent.sales.button_id: xxx
 live_agent.support.button_id: xxx
 live_agent.faq.button_id: xxx
