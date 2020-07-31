@@ -11,9 +11,6 @@ dialogflow.service_account_key:
   client_x509_cert_url: xxx
 freshchat.app_id: xxx
 freshchat.api_token: xxx
-live_agent.api_root: xxx
-live_agent.username: xxx
-live_agent.password: xxx
 live_agent.api_endpoint: xxx
 live_agent.organization_id: xxx
 live_agent.deployment_id: xxx
