@@ -19,7 +19,6 @@ async def test_submit_rma_component():
     text_event = SayEvent(text="Submitted your RMA, your reference ~0")
     next_entry = create_flow_next_entry(component_start_entry)
     log_entry = create_log_message_entry(
-        component_start_entry,
         level=Level.INFO,
         message="Submitted RMS",
         context={"firstname": firstname, "lastname": lastname},
