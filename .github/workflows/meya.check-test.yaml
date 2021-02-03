@@ -21,7 +21,7 @@ jobs:
           python-version: 3.9
       - name: Set up Google Cloud SDK
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        if: github.ref == 'refs/heads/master'
+#        if: github.ref == 'refs/heads/master'
         with:
           version: 321.0.0
           project_id: ${{ secrets.google_project_id }}
@@ -48,9 +48,9 @@ jobs:
       - name: Reset shadow git
         run: meya git reset --hard
       - name: Deploy app
-#        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         run: meya push --force --build-image
       - name: Deploy website
-        if: github.ref == 'refs/heads/master'
+#        if: github.ref == 'refs/heads/master'
         run: gsutil -h 'Cache-Control:public, max-age=86400, s-maxage=10' cp public/index.html
           gs://meya-v2-demo/google-rma-af34d9
