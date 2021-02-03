@@ -46,11 +46,12 @@ jobs:
       - name: Run tests
         run: meya test
       - name: Reset shadow git
+        if: github.ref == 'refs/heads/master'
         run: meya git reset --hard
       - name: Deploy app
         if: github.ref == 'refs/heads/master'
         run: meya push --force --build-image
       - name: Deploy website
-#        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         run: gsutil -h 'Cache-Control:public, max-age=86400, s-maxage=10' cp public/index.html
           gs://meya-v2-demo/google-rma-af34d9
